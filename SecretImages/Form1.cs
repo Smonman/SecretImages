@@ -1,18 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SecretImages
 {
     public partial class Form_main : Form
     {
+
+        private delegate void emptyDel();
+        private event emptyDel userInputEvent;
+        private event emptyDel startedEncoding;
+        private event emptyDel finishedEncoding;
+        private Bitmap imageEncode;
+        private Bitmap imageDecode;
+        private int maxCharAmount = 0;
+        private ProgressBar p;
+
+
         public Form_main()
         {
             InitializeComponent();
@@ -25,27 +34,17 @@ namespace SecretImages
             button_encode_saveImage.Enabled = false;
         }
 
-        delegate void emptyDel();
-        event emptyDel userInputEvent;
-        event emptyDel startedEncoding;
-        event emptyDel finishedEncoding;
-
-        Bitmap imageEncode;
-        Bitmap imageDecode;
-
-        int maxCharAmount = 0;
-
-        ProgressBar p;
-
-        Bitmap LoadImage()
+        private Bitmap LoadImage()
         {
             Bitmap newImage;
 
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Select Image";
-            ofd.RestoreDirectory = true;
-            ofd.Multiselect = false;
-            ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Title = "Select Image",
+                RestoreDirectory = true,
+                Multiselect = false,
+                Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png"
+            };
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -59,13 +58,14 @@ namespace SecretImages
             return newImage;
         }
 
-        void SaveImage(Image image)
+        private void SaveImage(Image image)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-
-            sfd.Title = "Save Image";
-            sfd.RestoreDirectory = true;
-            sfd.Filter = "PNG|*.png|JPEG|*jpg|Bitmap|*.bmp";
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Title = "Save Image",
+                RestoreDirectory = true,
+                Filter = "PNG|*.png|JPEG|*jpg|Bitmap|*.bmp"
+            };
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -88,36 +88,33 @@ namespace SecretImages
             }
         }
 
-        char[] GetTextInArray()
+        private char[] GetTextInArray()
         {
             string plainText = textBox_enocode.Text;
             byte[] byteArray = System.Text.UTF8Encoding.ASCII.GetBytes(plainText);
-            string binaryText = string.Join("", byteArray.Select(byt => Convert.ToString(byt, 2).PadLeft(8, '0'))); //https://stackoverflow.com/questions/5664345/string-to-binary-in-c-sharp
+            //https://stackoverflow.com/questions/5664345/string-to-binary-in-c-sharp
+            string binaryText = string.Join("", byteArray.Select(byt => Convert.ToString(byt, 2).PadLeft(8, '0')));
             return binaryText.ToCharArray();
         }
 
-        void OnUserInput()
+        private void OnUserInput()
         {
-            if (imageEncode != null && textBox_enocode.Text.Length > 0)
-            {
-                button_encode.Enabled = true;
-            } else
-            {
-                button_encode.Enabled = false;
-            }
+            button_encode.Enabled = imageEncode != null && textBox_enocode.Text.Length > 0;
         }
 
-        void OnStartedEncoding()
+        private void OnStartedEncoding()
         {
-            p = new ProgressBar();
-            p.Location = new Point(this.Height - 20, 20);
-            p.Size = new Size(100, 20);
-            p.MarqueeAnimationSpeed = 30;
-            p.Style = ProgressBarStyle.Marquee;
+            p = new ProgressBar
+            {
+                Location = new Point(Height - 20, 20),
+                Size = new Size(100, 20),
+                MarqueeAnimationSpeed = 30,
+                Style = ProgressBarStyle.Marquee
+            };
             tabPage_encode.Controls.Add(p);
         }
 
-        void OnFinishedEncoding()
+        private void OnFinishedEncoding()
         {
             button_encode_saveImage.Enabled = true;
         }
@@ -164,18 +161,14 @@ namespace SecretImages
             {
                 for (int x = 0; x < workingImage.Width; x++)
                 {
-                    if (workingImage.Width * y + x < array.Length)
+                    if ((workingImage.Width * y) + x < array.Length)
                     {
                         Color c = workingImage.GetPixel(x, y);
                         int r = c.R;
                         int g = c.G;
                         int b = c.B;
 
-                        //Console.WriteLine("{0} {1} {2}", Convert.ToString(r, 2), Convert.ToString(g, 2), Convert.ToString(b, 2));
-                        //Console.WriteLine(Convert.ToString(b, 2) + " " + array[workingImage.Width * y + x]);
-
-                        // SET BIT
-                        if (array[workingImage.Width * y + x] == '0')
+                        if (array[(workingImage.Width * y) + x] == '0')
                         {
                             b &= ~(1 << 0);
                         }
@@ -184,8 +177,6 @@ namespace SecretImages
                             b |= 1 << 0;
                         }
 
-                        //Console.WriteLine(Convert.ToString(b, 2));
-                        //Console.WriteLine();
                         encodedImage.SetPixel(x, y, Color.FromArgb(r, g, b));
                     }
                 }
@@ -208,15 +199,13 @@ namespace SecretImages
                 for (int x = 0; x < workingImage.Width; x++)
                 {
                     Color c = workingImage.GetPixel(x, y);
-                    int r = c.R;
-                    int g = c.G;
+                    _ = c.R;
+                    _ = c.G;
                     int b = c.B;
 
-                    sb.Append(Convert.ToString(b, 2).ToArray().Last());
+                    _ = sb.Append(Convert.ToString(b, 2).ToArray().Last());
                 }
             }
-
-            // cut string every 8 places, to byte array
 
             List<byte> data = new List<byte>();
             string fullString = sb.ToString();

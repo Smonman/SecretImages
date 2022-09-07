@@ -114,7 +114,7 @@
             this.tableLayoutPanel_enocode_2.Name = "tableLayoutPanel_enocode_2";
             this.tableLayoutPanel_enocode_2.RowCount = 1;
             this.tableLayoutPanel_enocode_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel_enocode_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 383F));
+            this.tableLayoutPanel_enocode_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 389F));
             this.tableLayoutPanel_enocode_2.Size = new System.Drawing.Size(770, 389);
             this.tableLayoutPanel_enocode_2.TabIndex = 0;
             // 
@@ -148,8 +148,8 @@
             // tableLayoutPanel_enocode_4
             // 
             this.tableLayoutPanel_enocode_4.ColumnCount = 2;
-            this.tableLayoutPanel_enocode_4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel_enocode_4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel_enocode_4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel_enocode_4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel_enocode_4.Controls.Add(this.button_encode_loadImage, 0, 0);
             this.tableLayoutPanel_enocode_4.Controls.Add(this.button_encode_saveImage, 1, 0);
             this.tableLayoutPanel_enocode_4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,7 +157,7 @@
             this.tableLayoutPanel_enocode_4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel_enocode_4.Name = "tableLayoutPanel_enocode_4";
             this.tableLayoutPanel_enocode_4.RowCount = 1;
-            this.tableLayoutPanel_enocode_4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel_enocode_4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel_enocode_4.Size = new System.Drawing.Size(385, 40);
             this.tableLayoutPanel_enocode_4.TabIndex = 2;
             // 
@@ -174,8 +174,8 @@
             // 
             // button_encode_saveImage
             // 
-            this.button_encode_saveImage.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button_encode_saveImage.Location = new System.Drawing.Point(307, 8);
+            this.button_encode_saveImage.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.button_encode_saveImage.Location = new System.Drawing.Point(84, 8);
             this.button_encode_saveImage.Name = "button_encode_saveImage";
             this.button_encode_saveImage.Size = new System.Drawing.Size(75, 23);
             this.button_encode_saveImage.TabIndex = 2;
@@ -246,7 +246,7 @@
             this.tableLayoutPanel_decode_2.Name = "tableLayoutPanel_decode_2";
             this.tableLayoutPanel_decode_2.RowCount = 1;
             this.tableLayoutPanel_decode_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel_decode_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 383F));
+            this.tableLayoutPanel_decode_2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 389F));
             this.tableLayoutPanel_decode_2.Size = new System.Drawing.Size(770, 389);
             this.tableLayoutPanel_decode_2.TabIndex = 0;
             // 
@@ -319,7 +319,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "Form_main";
             this.ShowIcon = false;
-            this.Text = "Secret Message Image";
+            this.Text = "Secret Images";
             this.tabControl_main.ResumeLayout(false);
             this.tabPage_encode.ResumeLayout(false);
             this.tableLayoutPanel_encode_1.ResumeLayout(false);

@@ -14,6 +14,6 @@ Choose an image you want to use as the medium for your secret. Write your data i
 ### Decoding
 To decode an existing image, switch to the __Decode__ tab on the top and load the image. Pressing the __Decode__ will extract any data from the image.
 
-> Note that it is possible to make the small changes visible by increasing the contrast of the image with an image processing tool.
+> **Note**: that it is possible to make the small changes visible by increasing the contrast of the image with an image processing tool.
 
 Further information: [Secrets Hidden in Images (Steganography) - Computerphile](https://www.youtube.com/watch?v=TWEXCYQKyDc&ab_channel=Computerphile)
